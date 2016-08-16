@@ -1,6 +1,6 @@
 <!--
 pragmatickm-task-view - SemanticCMS view of tasks in the current page and all children.
-Copyright (C) 2013, 2014, 2015, 2016  AO Industries, Inc.
+Copyright (C) 2014, 2015, 2016  AO Industries, Inc.
 	support@aoindustries.com
 	7262 Bull Pen Cir
 	Mobile, AL 36695
@@ -22,7 +22,7 @@ along with pragmatickm-task-view.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
 <!--
-Views all tasks in a page and all subpages with optional filters.
+Views the tasks in a page and all subpages in to-do order.
 
 Arguments:
 	arg.page  The page that should be displayed, this must have already been captured with at least meta data.
@@ -41,24 +41,35 @@ Arguments:
 	<c:set var="user" value="${task:getUser()}" />
 	<c:choose>
 		<c:when test="${pageScope.user == null}">
-			<h1>All Tasks in <ao:out value="${page.title}" /></h1>
+			<h1>Everything To Do in <ao:out value="${page.title}" /></h1>
 		</c:when>
 		<c:when test="${pageScope.user.name == 'Unassigned'}">
-			<h1>Unassigned Tasks in <ao:out value="${page.title}" /></h1>
+			<h1>Unassigned What To Do in <ao:out value="${page.title}" /></h1>
 		</c:when>
 		<c:otherwise>
-			<h1>Tasks for <ao:out value="${pageScope.user}" /> in <ao:out value="${page.title}" /></h1>
+			<h1>What To Do for <ao:out value="${pageScope.user}" /> in <ao:out value="${page.title}" /></h1>
 		</c:otherwise>
 	</c:choose>
 	<ao:include
 		page="user-task-counts.inc.jspx"
 		arg.page="${page}"
-		arg.showReady="false"
+		arg.showReady="true"
 		arg.user="${pageScope.user.name}"
-		arg.view="tasks"
+		arg.view="what-to-do"
 	/>
 	<ao:include
 		page="task-table.inc.jspx"
-		arg.tasks="${task:getAllTasks(page, pageScope.user)}"
+		arg.h2="Ready"
+		arg.tasks="${task:prioritizeTasks(task:getReadyTasks(page, pageScope.user), false)}"
+	/>
+	<ao:include
+		page="task-table.inc.jspx"
+		arg.h2="Blocked"
+		arg.tasks="${task:prioritizeTasks(task:getBlockedTasks(page, pageScope.user), false)}"
+	/>
+	<ao:include
+		page="task-table.inc.jspx"
+		arg.h2="Future"
+		arg.tasks="${task:prioritizeTasks(task:getFutureTasks(page, pageScope.user), true)}"
 	/>
 </jsp:root>
