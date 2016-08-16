@@ -1,0 +1,99 @@
+<!--
+pragmatickm-task-view - SemanticCMS view of tasks in the current page and all children.
+Copyright (C) 2013, 2014, 2015, 2016  AO Industries, Inc.
+	support@aoindustries.com
+	7262 Bull Pen Cir
+	Mobile, AL 36695
+
+This file is part of pragmatickm-task-view.
+
+pragmatickm-task-view is free software: you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+pragmatickm-task-view is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public License
+along with pragmatickm-task-view.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<!--
+Display the number of tasks assigned to each person.
+
+Arguments:
+	arg.page       The page that should be displayed, this must have already been captured with at least meta data.
+	arg.showReady  Show the ready counts
+    arg.user       The current User
+	arg.view       The current view
+-->
+<jsp:root
+	xmlns:ao="http://aoindustries.com/ao-taglib"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:task="https://pragmatickm.com/pragmatickm-task-taglib"
+	version="2.1"
+>
+	<jsp:directive.page language="java" buffer="512kb" autoFlush="true" pageEncoding="UTF-8" session="false" />
+	<c:set var="pageRef" value="${arg.page.pageRef}" />
+	<nav class="userList">
+		<h2 id="userListHeader">Users</h2>
+		<!-- No cookies used when exporting so user="" is same as no user parameter -->
+		<ao:a href="${pageRef}" param.view="${arg.view}" param.user="${p:isExporting() ? null : ''}">
+			<c:if test="${arg.user == null}">
+				<ao:class>docsUserTaskCountsActive</ao:class>
+			</c:if>
+			<c:choose>
+				<c:when test="${arg.showReady}">
+					All (<ao:out value="${fn:length(task:getReadyTasks(arg.page, null))}" />/<ao:out value="${fn:length(task:getBlockedTasks(arg.page, null))}" />/<ao:out value="${fn:length(task:getFutureTasks(arg.page, null))}" />)
+				</c:when>
+				<c:otherwise>
+					All (<ao:out value="${fn:length(task:getAllTasks(arg.page, null))}" />)
+				</c:otherwise>
+			</c:choose>
+		</ao:a>
+		<c:forEach var="u" items="${task:getAllUsers()}">
+			<c:choose>
+				<c:when test="${arg.showReady}">
+					<c:set var="readyTasks" value="${fn:length(task:getReadyTasks(arg.page, u))}" />
+					<c:set var="blockedTasks" value="${fn:length(task:getBlockedTasks(arg.page, u))}" />
+					<c:set var="futureTasks" value="${fn:length(task:getFutureTasks(arg.page, u))}" />
+				</c:when>
+				<c:otherwise>
+					<c:set var="allTasks" value="${fn:length(task:getAllTasks(arg.page, u))}" />
+				</c:otherwise>
+			</c:choose>
+			<c:if test="${
+				arg.user == u || (
+					arg.showReady
+					? (
+						readyTasks != 0
+						|| blockedTasks != 0
+						|| futureTasks != 0
+					) : (
+						allTasks != 0
+					)
+				)
+			}">
+				|
+				<ao:a href="${pageRef}" param.view="${arg.view}" param.user="${u}">
+					<c:if test="${arg.user == u}">
+						<ao:class>docsUserTaskCountsActive</ao:class>
+					</c:if>
+					<c:choose>
+						<c:when test="${arg.showReady}">
+							<ao:out value="${u}" /> (<ao:out value="${readyTasks}" />/<ao:out value="${blockedTasks}" />/<ao:out value="${futureTasks}" />)
+						</c:when>
+						<c:otherwise>
+							<ao:out value="${u}" /> (<ao:out value="${allTasks}" />)
+						</c:otherwise>
+					</c:choose>
+				</ao:a>
+			</c:if>
+		</c:forEach>
+	</nav>
+</jsp:root>
