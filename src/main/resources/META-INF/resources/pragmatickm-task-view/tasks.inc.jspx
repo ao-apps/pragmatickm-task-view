@@ -1,0 +1,63 @@
+<!--
+pragmatickm-task-view - SemanticCMS view of tasks in the current page and all children.
+Copyright (C) 2013, 2014, 2015, 2016  AO Industries, Inc.
+	support@aoindustries.com
+	7262 Bull Pen Cir
+	Mobile, AL 36695
+
+This file is part of pragmatickm-task-view.
+
+pragmatickm-task-view is free software: you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+pragmatickm-task-view is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public License
+along with pragmatickm-task-view.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<!--
+Views all tasks in a page and all subpages with optional filters.
+
+Arguments:
+	arg.page  The page that should be displayed, this must have already been captured with at least meta data.
+-->
+<jsp:root
+	xmlns:ao="http://aoindustries.com/ao-taglib"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	version="2.1"
+>
+	<jsp:directive.page language="java" buffer="512kb" autoFlush="true" pageEncoding="UTF-8" session="false" />
+	<c:set var="page" value="${arg.page}" />
+	<c:set var="pageRef" value="${page.pageRef}" />
+	<!-- Resolve the current user -->
+	<c:set var="user" value="${d:getUser()}" />
+	<c:choose>
+		<c:when test="${pageScope.user==null}">
+			<h1>All Tasks in <ao:out value="${page.title}" /></h1>
+		</c:when>
+		<c:when test="${pageScope.user.name=='Unassigned'}">
+			<h1>Unassigned Tasks in <ao:out value="${page.title}" /></h1>
+		</c:when>
+		<c:otherwise>
+			<h1>Tasks for <ao:out value="${pageScope.user}" /> in <ao:out value="${page.title}" /></h1>
+		</c:otherwise>
+	</c:choose>
+	<ao:include
+		page="user-task-counts.inc.jspx"
+		arg.page="${page}"
+		arg.showReady="false"
+		arg.user="${pageScope.user.name}"
+		arg.view="tasks"
+	/>
+	<ao:include
+		page="task-table.inc.jspx"
+		arg.tasks="${d:getAllTasks(page, pageScope.user)}"
+	/>
+</jsp:root>

@@ -1,0 +1,139 @@
+<!--
+pragmatickm-task-view - SemanticCMS view of tasks in the current page and all children.
+Copyright (C) 2013, 2014, 2015, 2016  AO Industries, Inc.
+	support@aoindustries.com
+	7262 Bull Pen Cir
+	Mobile, AL 36695
+
+This file is part of pragmatickm-task-view.
+
+pragmatickm-task-view is free software: you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+pragmatickm-task-view is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public License
+along with pragmatickm-task-view.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<!--
+Lists the provided tasks in a table.
+
+Arguments:
+	arg.h2          The h2 header to include, if empty none included
+	arg.tasks       The list of tasks to show
+-->
+<jsp:root
+	xmlns:ao="http://aoindustries.com/ao-taglib"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:task="https://pragmatickm.com/pragmatickm-task-taglib"
+	version="2.1"
+>
+	<jsp:directive.page language="java" buffer="512kb" autoFlush="true" pageEncoding="UTF-8" session="false" />
+	<c:if test="${!empty arg.h2}">
+		<h2><ao:out value="${arg.h2}" /></h2>
+	</c:if>
+	<!-- See if any task has pay and cost associated with it -->
+	<c:set var="hasPay" value="false" />
+	<c:set var="hasCost" value="false" />
+	<c:forEach var="task" items="${arg.tasks}">
+		<c:if test="${!empty task.pay}">
+			<c:set var="hasPay" value="true" />
+		</c:if>
+		<c:if test="${!empty task.cost}">
+			<c:set var="hasCost" value="true" />
+		</c:if>
+	</c:forEach>
+	<table class="thinTable">
+		<thead>
+			<tr>
+				<th>Task</th>
+				<th>Status</th>
+				<th>Priority</th>
+				<th>Assigned To</th>
+				<c:if test="${hasPay}">
+					<th>Pay</th>
+				</c:if>
+				<c:if test="${hasCost}">
+					<th>Cost</th>
+				</c:if>
+				<th>Do Before</th>
+				<th>Do After</th>
+			</tr>
+		</thead>
+		<tbody>
+			<c:choose>
+				<c:when test="${fn:length(arg.tasks) gt 0}">
+					<c:forEach var="task" items="${arg.tasks}">
+						<c:set var="page" value="${task.page}" />
+						<c:set var="taskStatus" value="${task.status}" />
+						<c:set var="taskPriority" value="${
+							taskStatus.date != null
+							? task.getPriority(taskStatus.date, task:getToday().timeInMillis)
+							: task.zeroDayPriority
+						}" />
+						<tr>
+							<td><ao:a class="taskLink" href="${page.pageRef}#${task.id}"><ao:out value="${task.label}" /></ao:a></td>
+							<td class="${fn:escapeXml(taskStatus.cssClass)}"><ao:out value="${taskStatus.description}" /></td>
+							<td class="${fn:escapeXml(taskPriority.cssClass)}"><ao:out value="${taskPriority}" /></td>
+							<td>
+								<c:forEach var="assignedTo" items="${task.assignedTo}" varStatus="assignedToStatus">
+									<ao:out value="${assignedTo}" /><c:if test="${!assignedToStatus.last}"><br /></c:if>
+								</c:forEach>
+							</td>
+							<c:if test="${hasPay}">
+								<td><ao:out value="${task.pay}" /></td>
+							</c:if>
+							<c:if test="${hasCost}">
+								<td><ao:out value="${task.cost}" /></td>
+							</c:if>
+							<td>
+								<c:set var="doBefores" value="${task.doBefores}" />
+								<c:choose>
+									<c:when test="${fn:length(doBefores) == 1}">
+										<c:set var="doBefore" value="${doBefores[0].task}" />
+										<p:link book="${doBefore.page.pageRef.book}" page="${doBefore.page.pageRef.path}" element="${doBefore.id}" allowGeneratedElement="true" />
+									</c:when>
+									<c:when test="${fn:length(doBefores) gt 1}">
+										<ol class="taskDoBefores">
+											<c:forEach var="doBeforeLookup" items="${doBefores}">
+												<c:set var="doBefore" value="${doBeforeLookup.task}" />
+												<li><p:link book="${doBefore.page.pageRef.book}" page="${doBefore.page.pageRef.path}" element="${doBefore.id}" allowGeneratedElement="true" /></li>
+											</c:forEach>
+										</ol>
+									</c:when>
+								</c:choose>
+							</td>
+							<td>
+								<c:set var="doAfters" value="${task:getDoAfters(task)}" />
+								<c:choose>
+									<c:when test="${fn:length(doAfters) == 1}">
+										<c:set var="doAfter" value="${doAfters[0]}" />
+										<p:link book="${doAfter.page.pageRef.book}" page="${doAfter.page.pageRef.path}" element="${doAfter.id}" allowGeneratedElement="true" />
+									</c:when>
+									<c:when test="${fn:length(doAfters) gt 1}">
+										<ol class="taskDoAfters">
+											<c:forEach var="doAfter" items="${doAfters}">
+												<li><p:link book="${doAfter.page.pageRef.book}" page="${doAfter.page.pageRef.path}" element="${doAfter.id}" allowGeneratedElement="true" /></li>
+											</c:forEach>
+										</ol>
+									</c:when>
+								</c:choose>
+							</td>
+						</tr>
+					</c:forEach>
+				</c:when>
+				<c:otherwise>
+					<tr><td colspan="6" style="text-align: center">No tasks.</td></tr>
+				</c:otherwise>
+			</c:choose>
+		</tbody>
+	</table>
+</jsp:root>
