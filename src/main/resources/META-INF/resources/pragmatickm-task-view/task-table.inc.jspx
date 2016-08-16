@@ -33,6 +33,7 @@ Arguments:
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
 	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:p="https://semanticcms.com/semanticcms-core-taglib"
 	xmlns:task="https://pragmatickm.com/pragmatickm-task-taglib"
 	version="2.1"
 >
