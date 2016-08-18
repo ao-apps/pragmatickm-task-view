@@ -23,6 +23,7 @@
 package com.pragmatickm.task.view;
 
 import com.aoindustries.servlet.http.Dispatcher;
+import com.pragmatickm.task.model.TaskException;
 import com.pragmatickm.task.model.User;
 import com.pragmatickm.task.servlet.TaskUtil;
 import com.semanticcms.core.model.Page;
@@ -57,6 +58,25 @@ public class WhatToDoView extends View {
 	@Override
 	public String getName() {
 		return VIEW_NAME;
+	}
+
+	@Override
+	public boolean isApplicable(ServletContext servletContext, HttpServletRequest request, HttpServletResponse response, Page page) throws ServletException, IOException {
+		try {
+			return TaskUtil.hasAssignedTask(
+				servletContext,
+				request,
+				response,
+				page,
+				TaskUtil.getUser(
+					request,
+					response
+				),
+				true
+			);
+		} catch(TaskException e) {
+			throw new ServletException(e);
+		}
 	}
 
 	@Override
