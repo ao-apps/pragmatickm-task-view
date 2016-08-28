@@ -31,6 +31,8 @@ import com.semanticcms.core.servlet.PageUtils;
 import com.semanticcms.core.servlet.View;
 import java.io.IOException;
 import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -64,6 +66,19 @@ public class TaskView extends View {
 	@Override
 	public boolean isApplicable(ServletContext servletContext, HttpServletRequest request, HttpServletResponse response, Page page) throws ServletException, IOException {
 		return PageUtils.hasElement(servletContext, request, response, page, Task.class, true);
+	}
+
+	@Override
+	public Map<String,List<String>> getLinkParams(ServletContext servletContext, HttpServletRequest request, HttpServletResponse response, Page page) {
+		User user = TaskUtil.getUser(request, response);
+		if(user == null) {
+			return Collections.emptyMap();
+		} else {
+			return Collections.singletonMap(
+				"user",
+				Collections.singletonList(user.name())
+			);
+		}
 	}
 
 	@Override
