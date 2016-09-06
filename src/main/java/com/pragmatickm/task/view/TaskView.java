@@ -107,7 +107,7 @@ public class TaskView extends View {
 	 * All info from tasks is available on the individual pages.
 	 */
 	@Override
-	public boolean getAllowRobots(Page page) {
+	public boolean getAllowRobots(ServletContext servletContext, HttpServletRequest request, HttpServletResponse response, Page page) {
 		return false;
 	}
 
