@@ -31,10 +31,10 @@ Arguments:
 <jsp:root
 	xmlns:ao="http://aoindustries.com/ao-taglib"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:core="https://semanticcms.com/core/taglib/"
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
 	xmlns:jsp="http://java.sun.com/JSP/Page"
-	xmlns:p="https://semanticcms.com/semanticcms-core-taglib"
-	xmlns:task="https://pragmatickm.com/pragmatickm-task-taglib"
+	xmlns:task="https://pragmatickm.com/task/taglib/"
 	version="2.1"
 >
 	<jsp:directive.page language="java" buffer="512kb" autoFlush="true" pageEncoding="UTF-8" session="false" />
@@ -81,7 +81,7 @@ Arguments:
 							: task.zeroDayPriority
 						}" />
 						<tr>
-							<td><ao:a class="${p:getLinkCssClass(task)}" href="${page.pageRef}#${task.id}"><ao:out value="${task.label}" /></ao:a></td>
+							<td><ao:a class="${core:getLinkCssClass(task)}" href="${page.pageRef}#${task.id}"><ao:out value="${task.label}" /></ao:a></td>
 							<td class="${fn:escapeXml(taskStatus.cssClass)}"><ao:out value="${taskStatus.description}" /></td>
 							<td class="${fn:escapeXml(taskPriority.cssClass)}"><ao:out value="${taskPriority}" /></td>
 							<td>
@@ -100,13 +100,13 @@ Arguments:
 								<c:choose>
 									<c:when test="${fn:length(doBefores) == 1}">
 										<c:set var="doBefore" value="${doBefores[0].task}" />
-										<p:link book="${doBefore.page.pageRef.book}" page="${doBefore.page.pageRef.path}" element="${doBefore.id}" allowGeneratedElement="true" />
+										<core:link book="${doBefore.page.pageRef.book}" page="${doBefore.page.pageRef.path}" element="${doBefore.id}" allowGeneratedElement="true" />
 									</c:when>
 									<c:when test="${fn:length(doBefores) gt 1}">
 										<ol class="taskDoBefores">
 											<c:forEach var="doBeforeLookup" items="${doBefores}">
 												<c:set var="doBefore" value="${doBeforeLookup.task}" />
-												<li><p:link book="${doBefore.page.pageRef.book}" page="${doBefore.page.pageRef.path}" element="${doBefore.id}" allowGeneratedElement="true" /></li>
+												<li><core:link book="${doBefore.page.pageRef.book}" page="${doBefore.page.pageRef.path}" element="${doBefore.id}" allowGeneratedElement="true" /></li>
 											</c:forEach>
 										</ol>
 									</c:when>
@@ -117,12 +117,12 @@ Arguments:
 								<c:choose>
 									<c:when test="${fn:length(doAfters) == 1}">
 										<c:set var="doAfter" value="${doAfters[0]}" />
-										<p:link book="${doAfter.page.pageRef.book}" page="${doAfter.page.pageRef.path}" element="${doAfter.id}" allowGeneratedElement="true" />
+										<core:link book="${doAfter.page.pageRef.book}" page="${doAfter.page.pageRef.path}" element="${doAfter.id}" allowGeneratedElement="true" />
 									</c:when>
 									<c:when test="${fn:length(doAfters) gt 1}">
 										<ol class="taskDoAfters">
 											<c:forEach var="doAfter" items="${doAfters}">
-												<li><p:link book="${doAfter.page.pageRef.book}" page="${doAfter.page.pageRef.path}" element="${doAfter.id}" allowGeneratedElement="true" /></li>
+												<li><core:link book="${doAfter.page.pageRef.book}" page="${doAfter.page.pageRef.path}" element="${doAfter.id}" allowGeneratedElement="true" /></li>
 											</c:forEach>
 										</ol>
 									</c:when>

@@ -33,10 +33,10 @@ Arguments:
 <jsp:root
 	xmlns:ao="http://aoindustries.com/ao-taglib"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:core="https://semanticcms.com/core/taglib/"
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
 	xmlns:jsp="http://java.sun.com/JSP/Page"
-	xmlns:p="https://semanticcms.com/semanticcms-core-taglib"
-	xmlns:task="https://pragmatickm.com/pragmatickm-task-taglib"
+	xmlns:task="https://pragmatickm.com/task/taglib/"
 	version="2.1"
 >
 	<jsp:directive.page language="java" buffer="512kb" autoFlush="true" pageEncoding="UTF-8" session="false" />
@@ -44,7 +44,7 @@ Arguments:
 	<nav class="userList">
 		<h2 id="userListHeader">Users</h2>
 		<!-- No cookies used when exporting so user="" is same as no user parameter -->
-		<ao:a href="${pageRef}" param.view="${arg.view}" param.user="${p:isExporting() ? null : ''}">
+		<ao:a href="${pageRef}" param.view="${arg.view}" param.user="${core:isExporting() ? null : ''}">
 			<c:if test="${arg.user == null}">
 				<ao:class>docsUserTaskCountsActive</ao:class>
 			</c:if>
