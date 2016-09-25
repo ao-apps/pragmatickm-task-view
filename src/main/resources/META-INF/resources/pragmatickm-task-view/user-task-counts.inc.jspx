@@ -48,26 +48,26 @@ Arguments:
 			<c:if test="${arg.user == null}">
 				<ao:class>docsUserTaskCountsActive</ao:class>
 			</c:if>
-			<c:choose>
-				<c:when test="${arg.showReady}">
+			<ao:choose>
+				<ao:when test="#{arg.showReady}">
 					All (<ao:out value="${fn:length(task:getReadyTasks(arg.page, null))}" />/<ao:out value="${fn:length(task:getBlockedTasks(arg.page, null))}" />/<ao:out value="${fn:length(task:getFutureTasks(arg.page, null))}" />)
-				</c:when>
-				<c:otherwise>
+				</ao:when>
+				<ao:otherwise>
 					All (<ao:out value="${fn:length(task:getAllTasks(arg.page, null))}" />)
-				</c:otherwise>
-			</c:choose>
+				</ao:otherwise>
+			</ao:choose>
 		</ao:a>
 		<c:forEach var="u" items="${task:getAllUsers()}">
-			<c:choose>
-				<c:when test="${arg.showReady}">
+			<ao:choose>
+				<ao:when test="#{arg.showReady}">
 					<c:set var="readyTasks" value="${fn:length(task:getReadyTasks(arg.page, u))}" />
 					<c:set var="blockedTasks" value="${fn:length(task:getBlockedTasks(arg.page, u))}" />
 					<c:set var="futureTasks" value="${fn:length(task:getFutureTasks(arg.page, u))}" />
-				</c:when>
-				<c:otherwise>
+				</ao:when>
+				<ao:otherwise>
 					<c:set var="allTasks" value="${fn:length(task:getAllTasks(arg.page, u))}" />
-				</c:otherwise>
-			</c:choose>
+				</ao:otherwise>
+			</ao:choose>
 			<c:if test="${
 				arg.user == u || (
 					arg.showReady
@@ -85,14 +85,14 @@ Arguments:
 					<c:if test="${arg.user == u}">
 						<ao:class>docsUserTaskCountsActive</ao:class>
 					</c:if>
-					<c:choose>
-						<c:when test="${arg.showReady}">
+					<ao:choose>
+						<ao:when test="#{arg.showReady}">
 							<ao:out value="${u}" /> (<ao:out value="${readyTasks}" />/<ao:out value="${blockedTasks}" />/<ao:out value="${futureTasks}" />)
-						</c:when>
-						<c:otherwise>
+						</ao:when>
+						<ao:otherwise>
 							<ao:out value="${u}" /> (<ao:out value="${allTasks}" />)
-						</c:otherwise>
-					</c:choose>
+						</ao:otherwise>
+					</ao:choose>
 				</ao:a>
 			</c:if>
 		</c:forEach>

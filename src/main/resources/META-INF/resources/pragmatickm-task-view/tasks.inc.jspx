@@ -39,17 +39,17 @@ Arguments:
 	<c:set var="pageRef" value="${page.pageRef}" />
 	<!-- Resolve the current user -->
 	<c:set var="user" value="${task:getUser()}" />
-	<c:choose>
-		<c:when test="${pageScope.user == null}">
+	<ao:choose>
+		<ao:when test="#{pageScope.user == null}">
 			<h1>All Tasks in <ao:out value="${page.title}" /></h1>
-		</c:when>
-		<c:when test="${pageScope.user.name == 'Unassigned'}">
+		</ao:when>
+		<ao:when test="#{pageScope.user.name == 'Unassigned'}">
 			<h1>Unassigned Tasks in <ao:out value="${page.title}" /></h1>
-		</c:when>
-		<c:otherwise>
+		</ao:when>
+		<ao:otherwise>
 			<h1>Tasks for <ao:out value="${pageScope.user}" /> in <ao:out value="${page.title}" /></h1>
-		</c:otherwise>
-	</c:choose>
+		</ao:otherwise>
+	</ao:choose>
 	<ao:include
 		page="user-task-counts.inc.jspx"
 		arg.page="${page}"
