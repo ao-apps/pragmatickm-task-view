@@ -38,6 +38,8 @@ Arguments:
 	version="2.1"
 >
 	<jsp:directive.page language="java" buffer="512kb" autoFlush="true" pageEncoding="UTF-8" session="false" />
+	<!-- Lookup all doAfters -->
+	<c:set var="multipleDoAfters" value="${task:getMultipleDoAfters(arg.tasks)}" />
 	<c:if test="${!empty arg.h2}">
 		<h2><ao:out value="${arg.h2}" /></h2>
 	</c:if>
@@ -113,7 +115,7 @@ Arguments:
 								</ao:choose>
 							</td>
 							<td>
-								<c:set var="doAfters" value="${task:getDoAfters(task)}" />
+								<c:set var="doAfters" value="${multipleDoAfters[task]}" />
 								<ao:choose>
 									<ao:when test="#{fn:length(doAfters) == 1}">
 										<c:set var="doAfter" value="${doAfters[0]}" />
