@@ -37,7 +37,7 @@ Arguments:
 	xmlns:task="https://pragmatickm.com/task/taglib/"
 	version="2.1"
 >
-	<jsp:directive.page language="java" buffer="512kb" autoFlush="true" pageEncoding="UTF-8" session="false" />
+	<jsp:directive.page language="java" pageEncoding="UTF-8" session="false" />
 	<!-- Lookup all doAfters -->
 	<c:set var="multipleDoAfters" value="${task:getMultipleDoAfters(arg.tasks)}" />
 	<c:if test="${!empty arg.h2}">
