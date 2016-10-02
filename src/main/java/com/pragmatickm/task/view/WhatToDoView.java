@@ -71,8 +71,7 @@ public class WhatToDoView extends View {
 			TaskUtil.getUser(
 				request,
 				response
-			),
-			true
+			)
 		);
 	}
 
