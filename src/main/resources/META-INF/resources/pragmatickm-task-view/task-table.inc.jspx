@@ -40,6 +40,8 @@ Arguments:
 	<jsp:directive.page language="java" pageEncoding="UTF-8" session="false" />
 	<!-- Lookup all doAfters -->
 	<c:set var="multipleDoAfters" value="${task:getMultipleDoAfters(arg.tasks)}" />
+	<!-- Lookup all statuses -->
+	<c:set var="multipleStatuses" value="${task:getMultipleStatuses(arg.tasks)}" />
 	<c:if test="${!empty arg.h2}">
 		<h2><ao:out value="${arg.h2}" /></h2>
 	</c:if>
@@ -76,7 +78,7 @@ Arguments:
 				<ao:when test="#{fn:length(arg.tasks) gt 0}">
 					<c:forEach var="task" items="${arg.tasks}">
 						<c:set var="page" value="${task.page}" />
-						<c:set var="taskStatus" value="${task.status}" />
+						<c:set var="taskStatus" value="${multipleStatuses[task]}" />
 						<c:set var="taskPriority" value="${
 							taskStatus.date != null
 							? task.getPriority(taskStatus.date, task:getToday().timeInMillis)
@@ -101,14 +103,13 @@ Arguments:
 								<c:set var="doBefores" value="${task.doBefores}" />
 								<ao:choose>
 									<ao:when test="#{fn:length(doBefores) == 1}">
-										<c:set var="doBefore" value="${doBefores[0].task}" />
-										<core:link book="#{doBefore.page.pageRef.book}" page="#{doBefore.page.pageRef.path}" element="#{doBefore.id}" allowGeneratedElement="true" />
+										<c:set var="doBefore" value="${doBefores.iterator().next()}" />
+										<core:link book="#{doBefore.pageRef.book}" page="#{doBefore.pageRef.path}" element="#{doBefore.id}" allowGeneratedElement="true" />
 									</ao:when>
 									<ao:when test="#{fn:length(doBefores) gt 1}">
 										<ol class="taskDoBefores">
-											<c:forEach var="doBeforeLookup" items="${doBefores}">
-												<c:set var="doBefore" value="${doBeforeLookup.task}" />
-												<li><core:link book="#{doBefore.page.pageRef.book}" page="#{doBefore.page.pageRef.path}" element="#{doBefore.id}" allowGeneratedElement="true" /></li>
+											<c:forEach var="doBefore" items="${doBefores}">
+												<li><core:link book="#{doBefore.pageRef.book}" page="#{doBefore.pageRef.path}" element="#{doBefore.id}" allowGeneratedElement="true" /></li>
 											</c:forEach>
 										</ol>
 									</ao:when>
