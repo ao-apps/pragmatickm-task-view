@@ -83,14 +83,25 @@ public class TaskView extends View {
 
 	@Override
 	public String getTitle(ServletContext servletContext, HttpServletRequest request, HttpServletResponse response, Page page) {
-		User user = TaskUtil.getUser(request, response);
-		if(user == null) {
-			return "All Tasks" + TITLE_SEPARATOR + page.getTitle() + TITLE_SEPARATOR + page.getPageRef().getBook().getTitle();
-		} else if(user == User.Unassigned) {
-			return "Unassigned Tasks" + TITLE_SEPARATOR + page.getTitle() + TITLE_SEPARATOR + page.getPageRef().getBook().getTitle();
-		} else {
-			return "Tasks for " + user + TITLE_SEPARATOR + page.getTitle() + TITLE_SEPARATOR + page.getPageRef().getBook().getTitle();
+		StringBuilder title = new StringBuilder();
+		{ // scoping block
+			User user = TaskUtil.getUser(request, response);
+			if(user == null) {
+				title.append("All Tasks");
+			} else if(user == User.Unassigned) {
+				title.append("Unassigned Tasks");
+			} else {
+				title.append("Tasks for ").append(user);
+			}
 		}
+		title.append(TITLE_SEPARATOR).append(page.getTitle());
+		{ // scoping block
+			String bookTitle = page.getPageRef().getBook().getTitle();
+			if(bookTitle != null && !bookTitle.isEmpty()) {
+				title.append(TITLE_SEPARATOR).append(bookTitle);
+			}
+		}
+		return title.toString();
 	}
 
 	@Override

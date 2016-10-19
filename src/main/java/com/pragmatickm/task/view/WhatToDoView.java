@@ -90,14 +90,25 @@ public class WhatToDoView extends View {
 
 	@Override
 	public String getTitle(ServletContext servletContext, HttpServletRequest request, HttpServletResponse response, Page page) {
-		User user = TaskUtil.getUser(request, response);
-		if(user == null) {
-			return "Everything To Do" + TITLE_SEPARATOR + page.getTitle() + TITLE_SEPARATOR + page.getPageRef().getBook().getTitle();
-		} else if(user == User.Unassigned) {
-			return "Unassigned What To Do" + TITLE_SEPARATOR + page.getTitle() + TITLE_SEPARATOR + page.getPageRef().getBook().getTitle();
-		} else {
-			return "What To Do for " + user + TITLE_SEPARATOR + page.getTitle() + TITLE_SEPARATOR + page.getPageRef().getBook().getTitle();
+		StringBuilder title = new StringBuilder();
+		{ // scoping block
+			User user = TaskUtil.getUser(request, response);
+			if(user == null) {
+				title.append("Everything To Do");
+			} else if(user == User.Unassigned) {
+				title.append("Unassigned What To Do");
+			} else {
+				title.append("What To Do for ").append(user);
+			}
 		}
+		title.append(TITLE_SEPARATOR).append(page.getTitle());
+		{ // scoping block
+			String bookTitle = page.getPageRef().getBook().getTitle();
+			if(bookTitle != null && !bookTitle.isEmpty()) {
+				title.append(TITLE_SEPARATOR).append(bookTitle);
+			}
+		}
+		return title.toString();
 	}
 
 	@Override
