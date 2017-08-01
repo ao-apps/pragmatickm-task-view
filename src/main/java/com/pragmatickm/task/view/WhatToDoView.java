@@ -1,6 +1,6 @@
 /*
  * pragmatickm-task-view - SemanticCMS view of tasks in the current page and all children.
- * Copyright (C) 2016  AO Industries, Inc.
+ * Copyright (C) 2016, 2017  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -26,6 +26,7 @@ import com.aoindustries.servlet.http.Dispatcher;
 import com.pragmatickm.task.model.User;
 import com.pragmatickm.task.servlet.TaskUtil;
 import com.semanticcms.core.model.Page;
+import com.semanticcms.core.servlet.SemanticCMS;
 import com.semanticcms.core.servlet.View;
 import java.io.IOException;
 import java.util.Collections;
@@ -103,7 +104,7 @@ public class WhatToDoView extends View {
 		}
 		title.append(TITLE_SEPARATOR).append(page.getTitle());
 		{ // scoping block
-			String bookTitle = page.getPageRef().getBook().getTitle();
+			String bookTitle = SemanticCMS.getInstance(servletContext).getBook(page.getPageRef().getBookRef()).getTitle();
 			if(bookTitle != null && !bookTitle.isEmpty()) {
 				title.append(TITLE_SEPARATOR).append(bookTitle);
 			}
