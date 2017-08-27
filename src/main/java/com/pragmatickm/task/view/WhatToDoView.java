@@ -24,10 +24,10 @@ package com.pragmatickm.task.view;
 
 import com.aoindustries.servlet.http.Dispatcher;
 import com.pragmatickm.task.model.User;
-import com.pragmatickm.task.servlet.TaskUtil;
+import com.pragmatickm.task.renderer.html.TaskUtil;
+import com.semanticcms.core.controller.SemanticCMS;
 import com.semanticcms.core.model.Page;
-import com.semanticcms.core.servlet.SemanticCMS;
-import com.semanticcms.core.servlet.View;
+import com.semanticcms.core.renderer.html.View;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
