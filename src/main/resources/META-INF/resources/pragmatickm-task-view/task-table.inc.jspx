@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 pragmatickm-task-view - SemanticCMS view of tasks in the current page and all children.
-Copyright (C) 2013, 2014, 2015, 2016  AO Industries, Inc.
+Copyright (C) 2013, 2014, 2015, 2016, 2019  AO Industries, Inc.
 	support@aoindustries.com
 	7262 Bull Pen Cir
 	Mobile, AL 36695
@@ -91,7 +91,7 @@ Arguments:
 							<td class="${fn:escapeXml(taskPriority.cssClass)}"><ao:out value="${taskPriority}" /></td>
 							<td>
 								<c:forEach var="assignedTo" items="${task.assignedTo}" varStatus="assignedToStatus">
-									<ao:out value="${assignedTo}" /><c:if test="${!assignedToStatus.last}"><br /></c:if>
+									<ao:out value="${assignedTo}" /><c:if test="${!assignedToStatus.last}"><ao:br /></c:if>
 								</c:forEach>
 							</td>
 							<c:if test="${hasPay}">
