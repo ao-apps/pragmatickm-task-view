@@ -58,7 +58,7 @@ Arguments:
 			<c:set var="hasCost" value="true" />
 		</c:if>
 	</c:forEach>
-	<table class="thinTable">
+	<table class="ao-grid">
 		<thead>
 			<tr>
 				<th>Task</th>
