@@ -71,6 +71,7 @@ along with pragmatickm-task-view.  If not, see <http://www.gnu.org/licenses />.
 								<link>${javac.link.javaeeApi.6}</link>
 								<!-- Direct -->
 								<link>https://aoindustries.com/ao-servlet-util/apidocs/</link>
+								<!-- No apidocs: <groupId>com.aoindustries</groupId><artifactId>ao-style</artifactId> -->
 								<link>https://aoindustries.com/ao-taglib/apidocs/</link>
 								<link>https://pragmatickm.com/task/model/apidocs/</link>
 								<link>https://pragmatickm.com/task/renderer/html/apidocs/</link>
@@ -98,6 +99,9 @@ along with pragmatickm-task-view.  If not, see <http://www.gnu.org/licenses />.
 			<!-- Direct -->
 			<dependency>
 				<groupId>com.aoindustries</groupId><artifactId>ao-servlet-util</artifactId><version>2.0.0-SNAPSHOT<!-- ${POST-SNAPSHOT} --></version>
+			</dependency>
+			<dependency>
+				<groupId>com.aoindustries</groupId><artifactId>ao-style</artifactId><version>1.0.0-SNAPSHOT<!-- ${POST-SNAPSHOT} --></version>
 			</dependency>
 			<dependency>
 				<groupId>com.aoindustries</groupId><artifactId>ao-taglib</artifactId><version>5.0.0-SNAPSHOT<!-- ${POST-SNAPSHOT} --></version>
@@ -139,6 +143,9 @@ along with pragmatickm-task-view.  If not, see <http://www.gnu.org/licenses />.
 		<!-- Direct -->
 		<dependency>
 			<groupId>com.aoindustries</groupId><artifactId>ao-servlet-util</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.aoindustries</groupId><artifactId>ao-style</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.aoindustries</groupId><artifactId>ao-taglib</artifactId>
