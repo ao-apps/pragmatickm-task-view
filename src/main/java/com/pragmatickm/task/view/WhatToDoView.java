@@ -27,13 +27,17 @@ import com.aoindustries.servlet.http.Dispatcher;
 import com.pragmatickm.task.model.User;
 import com.pragmatickm.task.servlet.TaskUtil;
 import com.semanticcms.core.model.Page;
+import com.semanticcms.core.servlet.SemanticCMS;
 import com.semanticcms.core.servlet.View;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.ServletContext;
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.SkipPageException;
@@ -43,9 +47,23 @@ import javax.servlet.jsp.SkipPageException;
  */
 public class WhatToDoView extends View {
 
-	static final String VIEW_NAME = "what-to-do";
+	public static final String NAME = "what-to-do";
 
 	private static final String JSPX_TARGET = "/pragmatickm-task-view/what-to-do.inc.jspx";
+
+	@WebListener("Registers the \"" + NAME + "\" view in SemanticCMS.")
+	public static class Initializer implements ServletContextListener {
+		@Override
+		public void contextInitialized(ServletContextEvent event) {
+			SemanticCMS.getInstance(event.getServletContext()).addView(new WhatToDoView());
+		}
+		@Override
+		public void contextDestroyed(ServletContextEvent event) {
+			// Do nothing
+		}
+	}
+
+	private WhatToDoView() {}
 
 	@Override
 	public Group getGroup() {
@@ -59,7 +77,7 @@ public class WhatToDoView extends View {
 
 	@Override
 	public String getName() {
-		return VIEW_NAME;
+		return NAME;
 	}
 
 	@Override
