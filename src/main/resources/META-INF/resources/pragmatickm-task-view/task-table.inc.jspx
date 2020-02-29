@@ -88,7 +88,7 @@ Arguments:
 						}" />
 						<tr>
 							<td><ao:a class="${core:getLinkCssClass(task)}" href="${page.pageRef}#${task.id}"><ao:out value="${task.label}" /></ao:a></td>
-							<td class="${fn:escapeXml(taskStatus.cssClass)}"><ao:out value="${taskStatus.description}" /></td>
+							<td class="${fn:escapeXml(taskStatus.style.cssClass)}"><ao:out value="${taskStatus.description}" /></td>
 							<td class="${fn:escapeXml(taskPriority.cssClass)}"><ao:out value="${taskPriority}" /></td>
 							<td>
 								<c:forEach var="assignedTo" items="${task.assignedTo}" varStatus="assignedToStatus">
