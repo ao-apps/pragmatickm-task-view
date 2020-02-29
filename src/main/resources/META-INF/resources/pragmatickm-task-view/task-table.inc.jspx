@@ -58,7 +58,7 @@ Arguments:
 			<c:set var="hasCost" value="true" />
 		</c:if>
 	</c:forEach>
-	<table class="ao-grid">
+	<table class="ao-grid pragmatickm-task-view-task-table">
 		<thead>
 			<tr>
 				<th>Task</th>
@@ -109,7 +109,7 @@ Arguments:
 										<core:link book="#{doBefore.pageRef.book}" page="#{doBefore.pageRef.path}" element="#{doBefore.id}" allowGeneratedElement="true" />
 									</ao:when>
 									<ao:when test="#{fn:length(doBefores) gt 1}">
-										<ol class="taskDoBefores">
+										<ol class="pragmatickm-task-view-task-table-do-befores">
 											<c:forEach var="doBefore" items="${doBefores}">
 												<li><core:link book="#{doBefore.pageRef.book}" page="#{doBefore.pageRef.path}" element="#{doBefore.id}" allowGeneratedElement="true" /></li>
 											</c:forEach>
@@ -125,7 +125,7 @@ Arguments:
 										<core:link book="#{doAfter.page.pageRef.book}" page="#{doAfter.page.pageRef.path}" element="#{doAfter.id}" allowGeneratedElement="true" />
 									</ao:when>
 									<ao:when test="#{fn:length(doAfters) gt 1}">
-										<ol class="taskDoAfters">
+										<ol class="pragmatickm-task-view-task-table-do-afters">
 											<c:forEach var="doAfter" items="${doAfters}">
 												<li><core:link book="#{doAfter.page.pageRef.book}" page="#{doAfter.page.pageRef.path}" element="#{doAfter.id}" allowGeneratedElement="true" /></li>
 											</c:forEach>

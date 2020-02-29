@@ -43,12 +43,12 @@ Arguments:
 	<jsp:directive.page language="java" pageEncoding="UTF-8" />
 	<jsp:directive.page session="false" />
 	<c:set var="pageRef" value="${arg.page.pageRef}" />
-	<nav class="userList">
-		<h2 id="userListHeader">Users</h2>
+	<nav id="pragmatickm-task-view-user-list">
+		<h2>Users</h2>
 		<!-- No cookies used when exporting so user="" is same as no user parameter -->
 		<ao:a href="${pageRef}" param.view="${arg.view}" param.user="${core:isExporting() ? null : ''}">
 			<c:if test="${arg.user == null}">
-				<ao:class>docsUserTaskCountsActive</ao:class>
+				<ao:class>pragmatickm-task-view-user-task-counts-active</ao:class>
 			</c:if>
 			<ao:choose>
 				<ao:when test="#{arg.showReady}">
@@ -85,7 +85,7 @@ Arguments:
 				|
 				<ao:a href="${pageRef}" param.view="${arg.view}" param.user="${u}">
 					<c:if test="${arg.user == u}">
-						<ao:class>docsUserTaskCountsActive</ao:class>
+						<ao:class>pragmatickm-task-view-user-task-counts-active</ao:class>
 					</c:if>
 					<ao:choose>
 						<ao:when test="#{arg.showReady}">
