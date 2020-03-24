@@ -30,7 +30,7 @@
 * [Project Home](https://pragmatickm.com/task/view/)
 * [Changelog](https://pragmatickm.com/task/view/changelog)
 * [API Docs](https://pragmatickm.com/task/view/apidocs/)
-* [Maven Central Repository](https://search.maven.org/#search%7Cgav%7C1%7Cg:%22com.pragmatickm%22%20AND%20a:%22pragmatickm-task-view%22)
+* [Maven Central Repository](https://search.maven.org/artifact/com.pragmatickm/pragmatickm-task-view)
 * [GitHub](https://github.com/aoindustries/pragmatickm-task-view)
 
 ## Contact Us
