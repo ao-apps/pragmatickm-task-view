@@ -72,14 +72,10 @@ along with pragmatickm-task-view.  If not, see <http://www.gnu.org/licenses />.
 								<!-- Direct -->
 								<link>https://aoindustries.com/ao-fluent-html/apidocs/</link>
 								<link>https://aoindustries.com/ao-servlet-util/apidocs/</link>
-								<link>https://aoindustries.com/ao-style/apidocs/</link>
-								<link>https://aoindustries.com/ao-taglib/apidocs/</link>
 								<link>https://pragmatickm.com/task/model/apidocs/</link>
 								<link>https://pragmatickm.com/task/servlet/apidocs/</link>
-								<link>https://pragmatickm.com/task/taglib/apidocs/</link>
 								<link>https://semanticcms.com/core/model/apidocs/</link>
 								<link>https://semanticcms.com/core/servlet/apidocs/</link>
-								<link>https://semanticcms.com/core/taglib/apidocs/</link>
 							</links>
 						</configuration>
 					</plugin>
@@ -104,25 +100,26 @@ along with pragmatickm-task-view.  If not, see <http://www.gnu.org/licenses />.
 				<groupId>com.aoindustries</groupId><artifactId>ao-servlet-util</artifactId><version>2.0.0${POST-SNAPSHOT}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.aoindustries</groupId><artifactId>ao-style</artifactId><version>1.0.0${POST-SNAPSHOT}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.aoindustries</groupId><artifactId>ao-taglib</artifactId><version>5.0.0${POST-SNAPSHOT}</version>
-			</dependency>
-			<dependency>
 				<groupId>com.pragmatickm</groupId><artifactId>pragmatickm-task-model</artifactId><version>1.5.0${POST-SNAPSHOT}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.pragmatickm</groupId><artifactId>pragmatickm-task-servlet</artifactId><version>1.6.0${POST-SNAPSHOT}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.pragmatickm</groupId><artifactId>pragmatickm-task-taglib</artifactId><version>1.6.0${POST-SNAPSHOT}</version>
-			</dependency>
-			<dependency>
 				<groupId>com.semanticcms</groupId><artifactId>semanticcms-core-model</artifactId><version>1.11.0${POST-SNAPSHOT}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.semanticcms</groupId><artifactId>semanticcms-core-servlet</artifactId><version>1.15.0${POST-SNAPSHOT}</version>
+			</dependency>
+			<!-- Runtime Direct -->
+			<dependency>
+				<groupId>com.aoindustries</groupId><artifactId>ao-style</artifactId><version>1.0.0${POST-SNAPSHOT}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.aoindustries</groupId><artifactId>ao-taglib</artifactId><version>5.0.0${POST-SNAPSHOT}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.pragmatickm</groupId><artifactId>pragmatickm-task-taglib</artifactId><version>1.6.0${POST-SNAPSHOT}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.semanticcms</groupId><artifactId>semanticcms-core-taglib</artifactId><version>1.12.0${POST-SNAPSHOT}</version>
@@ -148,19 +145,10 @@ along with pragmatickm-task-view.  If not, see <http://www.gnu.org/licenses />.
 			<groupId>com.aoindustries</groupId><artifactId>ao-servlet-util</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.aoindustries</groupId><artifactId>ao-style</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.aoindustries</groupId><artifactId>ao-taglib</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>com.pragmatickm</groupId><artifactId>pragmatickm-task-model</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.pragmatickm</groupId><artifactId>pragmatickm-task-servlet</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.pragmatickm</groupId><artifactId>pragmatickm-task-taglib</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.semanticcms</groupId><artifactId>semanticcms-core-model</artifactId>
@@ -168,8 +156,22 @@ along with pragmatickm-task-view.  If not, see <http://www.gnu.org/licenses />.
 		<dependency>
 			<groupId>com.semanticcms</groupId><artifactId>semanticcms-core-servlet</artifactId>
 		</dependency>
+		<!-- Runtime Direct -->
+		<dependency>
+			<groupId>com.aoindustries</groupId><artifactId>ao-style</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.aoindustries</groupId><artifactId>ao-taglib</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.pragmatickm</groupId><artifactId>pragmatickm-task-taglib</artifactId>
+			<scope>runtime</scope>
+		</dependency>
 		<dependency>
 			<groupId>com.semanticcms</groupId><artifactId>semanticcms-core-taglib</artifactId>
+			<scope>runtime</scope>
 		</dependency>
 	</dependencies>
 </project>
