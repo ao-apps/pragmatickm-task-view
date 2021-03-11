@@ -23,6 +23,7 @@
 package com.pragmatickm.task.view;
 
 import com.aoindustries.html.FlowContent;
+import com.aoindustries.html.servlet.DocumentEE;
 import com.aoindustries.servlet.http.Dispatcher;
 import com.pragmatickm.task.model.User;
 import com.pragmatickm.task.servlet.TaskUtil;
@@ -95,7 +96,7 @@ public class WhatToDoView extends View {
 	}
 
 	@Override
-	public Map<String,List<String>> getLinkParams(ServletContext servletContext, HttpServletRequest request, HttpServletResponse response, Page page) {
+	public Map<String, List<String>> getLinkParams(ServletContext servletContext, HttpServletRequest request, HttpServletResponse response, Page page) {
 		User user = TaskUtil.getUser(request, response);
 		if(user == null) {
 			return Collections.emptyMap();
@@ -149,7 +150,7 @@ public class WhatToDoView extends View {
 	}
 
 	@Override
-	public <__ extends FlowContent<__>> void doView(ServletContext servletContext, HttpServletRequest request, HttpServletResponse response, __ flow, Page page) throws ServletException, IOException, SkipPageException {
+	public <__ extends FlowContent<DocumentEE, __>> void doView(ServletContext servletContext, HttpServletRequest request, HttpServletResponse response, __ flow, Page page) throws ServletException, IOException, SkipPageException {
 		Dispatcher.include(
 			servletContext,
 			JSPX_TARGET,
