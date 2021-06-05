@@ -22,8 +22,8 @@
  */
 package com.pragmatickm.task.view;
 
-import com.aoindustries.html.servlet.FlowContent;
-import com.aoindustries.servlet.http.Dispatcher;
+import com.aoapps.html.servlet.FlowContent;
+import com.aoapps.servlet.http.Dispatcher;
 import com.pragmatickm.task.model.User;
 import com.pragmatickm.task.servlet.TaskUtil;
 import com.semanticcms.core.model.Page;
