@@ -47,7 +47,7 @@ import javax.servlet.jsp.SkipPageException;
 /**
  * View of all tasks in the current page and all children.
  */
-public class TaskView extends View {
+public final class TaskView extends View {
 
 	public static final String NAME = "tasks";
 
@@ -65,7 +65,9 @@ public class TaskView extends View {
 		}
 	}
 
-	private TaskView() {}
+	private TaskView() {
+		// Do nothing
+	}
 
 	@Override
 	public Group getGroup() {

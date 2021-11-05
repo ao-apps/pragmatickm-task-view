@@ -45,7 +45,7 @@ import javax.servlet.jsp.SkipPageException;
 /**
  * View of tasks to do in the current page and all children.
  */
-public class WhatToDoView extends View {
+public final class WhatToDoView extends View {
 
 	public static final String NAME = "what-to-do";
 
@@ -63,7 +63,9 @@ public class WhatToDoView extends View {
 		}
 	}
 
-	private WhatToDoView() {}
+	private WhatToDoView() {
+		// Do nothing
+	}
 
 	@Override
 	public Group getGroup() {
