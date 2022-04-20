@@ -48,117 +48,117 @@ import javax.servlet.jsp.SkipPageException;
  */
 public final class WhatToDoView extends View {
 
-	public static final String NAME = "what-to-do";
+  public static final String NAME = "what-to-do";
 
-	private static final String JSPX_TARGET = "/pragmatickm-task-view/what-to-do.inc.jspx";
+  private static final String JSPX_TARGET = "/pragmatickm-task-view/what-to-do.inc.jspx";
 
-	@WebListener("Registers the \"" + NAME + "\" view in SemanticCMS.")
-	public static class Initializer implements ServletContextListener {
-		@Override
-		public void contextInitialized(ServletContextEvent event) {
-			SemanticCMS.getInstance(event.getServletContext()).addView(new WhatToDoView());
-		}
-		@Override
-		public void contextDestroyed(ServletContextEvent event) {
-			// Do nothing
-		}
-	}
+  @WebListener("Registers the \"" + NAME + "\" view in SemanticCMS.")
+  public static class Initializer implements ServletContextListener {
+    @Override
+    public void contextInitialized(ServletContextEvent event) {
+      SemanticCMS.getInstance(event.getServletContext()).addView(new WhatToDoView());
+    }
+    @Override
+    public void contextDestroyed(ServletContextEvent event) {
+      // Do nothing
+    }
+  }
 
-	private WhatToDoView() {
-		// Do nothing
-	}
+  private WhatToDoView() {
+    // Do nothing
+  }
 
-	@Override
-	public Group getGroup() {
-		return Group.VARIABLE;
-	}
+  @Override
+  public Group getGroup() {
+    return Group.VARIABLE;
+  }
 
-	@Override
-	public String getDisplay() {
-		return "What To Do";
-	}
+  @Override
+  public String getDisplay() {
+    return "What To Do";
+  }
 
-	@Override
-	public String getName() {
-		return NAME;
-	}
+  @Override
+  public String getName() {
+    return NAME;
+  }
 
-	@Override
-	public boolean isApplicable(ServletContext servletContext, HttpServletRequest request, HttpServletResponse response, Page page) throws ServletException, IOException {
-		return TaskUtil.hasAssignedTask(
-			servletContext,
-			request,
-			response,
-			page,
-			TaskUtil.getUser(
-				request,
-				response
-			)
-		);
-	}
+  @Override
+  public boolean isApplicable(ServletContext servletContext, HttpServletRequest request, HttpServletResponse response, Page page) throws ServletException, IOException {
+    return TaskUtil.hasAssignedTask(
+      servletContext,
+      request,
+      response,
+      page,
+      TaskUtil.getUser(
+        request,
+        response
+      )
+    );
+  }
 
-	@Override
-	public Map<String, List<String>> getLinkParams(ServletContext servletContext, HttpServletRequest request, HttpServletResponse response, Page page) {
-		User user = TaskUtil.getUser(request, response);
-		if(user == null) {
-			return Collections.emptyMap();
-		} else {
-			return Collections.singletonMap(
-				"user",
-				Collections.singletonList(user.name())
-			);
-		}
-	}
+  @Override
+  public Map<String, List<String>> getLinkParams(ServletContext servletContext, HttpServletRequest request, HttpServletResponse response, Page page) {
+    User user = TaskUtil.getUser(request, response);
+    if (user == null) {
+      return Collections.emptyMap();
+    } else {
+      return Collections.singletonMap(
+        "user",
+        Collections.singletonList(user.name())
+      );
+    }
+  }
 
-	@Override
-	public String getTitle(ServletContext servletContext, HttpServletRequest request, HttpServletResponse response, Page page) {
-		StringBuilder title = new StringBuilder();
-		{ // scoping block
-			User user = TaskUtil.getUser(request, response);
-			if(user == null) {
-				title.append("Everything To Do");
-			} else if(user == User.Unassigned) {
-				title.append("Unassigned What To Do");
-			} else {
-				title.append("What To Do for ").append(user);
-			}
-		}
-		title.append(TITLE_SEPARATOR).append(page.getTitle());
-		{ // scoping block
-			String bookTitle = page.getPageRef().getBook().getTitle();
-			if(bookTitle != null && !bookTitle.isEmpty()) {
-				title.append(TITLE_SEPARATOR).append(bookTitle);
-			}
-		}
-		return title.toString();
-	}
+  @Override
+  public String getTitle(ServletContext servletContext, HttpServletRequest request, HttpServletResponse response, Page page) {
+    StringBuilder title = new StringBuilder();
+    { // scoping block
+      User user = TaskUtil.getUser(request, response);
+      if (user == null) {
+        title.append("Everything To Do");
+      } else if (user == User.Unassigned) {
+        title.append("Unassigned What To Do");
+      } else {
+        title.append("What To Do for ").append(user);
+      }
+    }
+    title.append(TITLE_SEPARATOR).append(page.getTitle());
+    { // scoping block
+      String bookTitle = page.getPageRef().getBook().getTitle();
+      if (bookTitle != null && !bookTitle.isEmpty()) {
+        title.append(TITLE_SEPARATOR).append(bookTitle);
+      }
+    }
+    return title.toString();
+  }
 
-	@Override
-	public String getDescription(Page page) {
-		return null;
-	}
+  @Override
+  public String getDescription(Page page) {
+    return null;
+  }
 
-	@Override
-	public String getKeywords(Page page) {
-		return null;
-	}
+  @Override
+  public String getKeywords(Page page) {
+    return null;
+  }
 
-	/**
-	 * All info from tasks is available on the individual pages.
-	 */
-	@Override
-	public boolean getAllowRobots(ServletContext servletContext, HttpServletRequest request, HttpServletResponse response, Page page) {
-		return false;
-	}
+  /**
+   * All info from tasks is available on the individual pages.
+   */
+  @Override
+  public boolean getAllowRobots(ServletContext servletContext, HttpServletRequest request, HttpServletResponse response, Page page) {
+    return false;
+  }
 
-	@Override
-	public <__ extends FlowContent<__>> void doView(ServletContext servletContext, HttpServletRequest request, HttpServletResponse response, __ flow, Page page) throws ServletException, IOException, SkipPageException {
-		Dispatcher.include(
-			servletContext,
-			JSPX_TARGET,
-			request,
-			response,
-			Collections.singletonMap("page", page)
-		);
-	}
+  @Override
+  public <__ extends FlowContent<__>> void doView(ServletContext servletContext, HttpServletRequest request, HttpServletResponse response, __ flow, Page page) throws ServletException, IOException, SkipPageException {
+    Dispatcher.include(
+      servletContext,
+      JSPX_TARGET,
+      request,
+      response,
+      Collections.singletonMap("page", page)
+    );
+  }
 }

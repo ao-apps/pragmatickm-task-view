@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 pragmatickm-task-view - SemanticCMS view of tasks in the current page and all children.
-Copyright (C) 2013, 2014, 2015, 2016, 2020, 2021  AO Industries, Inc.
-	support@aoindustries.com
-	7262 Bull Pen Cir
-	Mobile, AL 36695
+Copyright (C) 2013, 2014, 2015, 2016, 2020, 2021, 2022  AO Industries, Inc.
+    support@aoindustries.com
+    7262 Bull Pen Cir
+    Mobile, AL 36695
 
 This file is part of pragmatickm-task-view.
 
@@ -26,77 +26,77 @@ along with pragmatickm-task-view.  If not, see <https://www.gnu.org/licenses/>.
 Display the number of tasks assigned to each person.
 
 Arguments:
-	arg.page       The page that should be displayed, this must have already been captured with at least meta data.
-	arg.showReady  Show the ready counts
+  arg.page       The page that should be displayed, this must have already been captured with at least meta data.
+  arg.showReady  Show the ready counts
     arg.user       The current User
-	arg.view       The current view
+  arg.view       The current view
 -->
 <jsp:root
-	xmlns:ao="https://oss.aoapps.com/taglib/"
-	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:core="https://semanticcms.com/core/taglib/"
-	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
-	xmlns:jsp="http://java.sun.com/JSP/Page"
-	xmlns:task="https://pragmatickm.com/task/taglib/"
-	version="2.1"
+  xmlns:ao="https://oss.aoapps.com/taglib/"
+  xmlns:c="http://java.sun.com/jsp/jstl/core"
+  xmlns:core="https://semanticcms.com/core/taglib/"
+  xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+  xmlns:jsp="http://java.sun.com/JSP/Page"
+  xmlns:task="https://pragmatickm.com/task/taglib/"
+  version="2.1"
 >
-	<jsp:directive.page language="java" pageEncoding="UTF-8" />
-	<jsp:directive.page session="false" />
-	<c:set var="pageRef" value="${arg.page.pageRef}" />
-	<nav id="pragmatickm-task-view-user-list">
-		<h2>Users</h2>
-		<!-- No cookies used when exporting so user="" is same as no user parameter -->
-		<ao:a href="${pageRef}" param.view="${arg.view}" param.user="${core:isExporting() ? null : ''}">
-			<c:if test="${arg.user == null}">
-				<ao:class>pragmatickm-task-view-user-task-counts-active</ao:class>
-			</c:if>
-			<ao:choose>
-				<ao:when test="#{arg.showReady}">
-					All (<ao:out value="${fn:length(task:getReadyTasks(arg.page, null))}" />/<ao:out value="${fn:length(task:getBlockedTasks(arg.page, null))}" />/<ao:out value="${fn:length(task:getFutureTasks(arg.page, null))}" />)
-				</ao:when>
-				<ao:otherwise>
-					All (<ao:out value="${fn:length(task:getAllTasks(arg.page, null))}" />)
-				</ao:otherwise>
-			</ao:choose>
-		</ao:a>
-		<c:forEach var="u" items="${task:getAllUsers()}">
-			<ao:choose>
-				<ao:when test="#{arg.showReady}">
-					<c:set var="readyTasks" value="${fn:length(task:getReadyTasks(arg.page, u))}" />
-					<c:set var="blockedTasks" value="${fn:length(task:getBlockedTasks(arg.page, u))}" />
-					<c:set var="futureTasks" value="${fn:length(task:getFutureTasks(arg.page, u))}" />
-				</ao:when>
-				<ao:otherwise>
-					<c:set var="allTasks" value="${fn:length(task:getAllTasks(arg.page, u))}" />
-				</ao:otherwise>
-			</ao:choose>
-			<c:if test="${
-				arg.user == u || (
-					arg.showReady
-					? (
-						readyTasks != 0
-						|| blockedTasks != 0
-						|| futureTasks != 0
-					) : (
-						allTasks != 0
-					)
-				)
-			}">
-				|
-				<ao:a href="${pageRef}" param.view="${arg.view}" param.user="${u}">
-					<c:if test="${arg.user == u}">
-						<ao:class>pragmatickm-task-view-user-task-counts-active</ao:class>
-					</c:if>
-					<ao:choose>
-						<ao:when test="#{arg.showReady}">
-							<ao:out value="${u}" /> (<ao:out value="${readyTasks}" />/<ao:out value="${blockedTasks}" />/<ao:out value="${futureTasks}" />)
-						</ao:when>
-						<ao:otherwise>
-							<ao:out value="${u}" /> (<ao:out value="${allTasks}" />)
-						</ao:otherwise>
-					</ao:choose>
-				</ao:a>
-			</c:if>
-		</c:forEach>
-	</nav>
+  <jsp:directive.page language="java" pageEncoding="UTF-8" />
+  <jsp:directive.page session="false" />
+  <c:set var="pageRef" value="${arg.page.pageRef}" />
+  <nav id="pragmatickm-task-view-user-list">
+    <h2>Users</h2>
+    <!-- No cookies used when exporting so user="" is same as no user parameter -->
+    <ao:a href="${pageRef}" param.view="${arg.view}" param.user="${core:isExporting() ? null : ''}">
+      <c:if test="${arg.user == null}">
+        <ao:class>pragmatickm-task-view-user-task-counts-active</ao:class>
+      </c:if>
+      <ao:choose>
+        <ao:when test="#{arg.showReady}">
+          All (<ao:out value="${fn:length(task:getReadyTasks(arg.page, null))}" />/<ao:out value="${fn:length(task:getBlockedTasks(arg.page, null))}" />/<ao:out value="${fn:length(task:getFutureTasks(arg.page, null))}" />)
+        </ao:when>
+        <ao:otherwise>
+          All (<ao:out value="${fn:length(task:getAllTasks(arg.page, null))}" />)
+        </ao:otherwise>
+      </ao:choose>
+    </ao:a>
+    <c:forEach var="u" items="${task:getAllUsers()}">
+      <ao:choose>
+        <ao:when test="#{arg.showReady}">
+          <c:set var="readyTasks" value="${fn:length(task:getReadyTasks(arg.page, u))}" />
+          <c:set var="blockedTasks" value="${fn:length(task:getBlockedTasks(arg.page, u))}" />
+          <c:set var="futureTasks" value="${fn:length(task:getFutureTasks(arg.page, u))}" />
+        </ao:when>
+        <ao:otherwise>
+          <c:set var="allTasks" value="${fn:length(task:getAllTasks(arg.page, u))}" />
+        </ao:otherwise>
+      </ao:choose>
+      <c:if test="${
+        arg.user == u || (
+          arg.showReady
+          ? (
+            readyTasks != 0
+            || blockedTasks != 0
+            || futureTasks != 0
+          ) : (
+            allTasks != 0
+          )
+        )
+      }">
+        |
+        <ao:a href="${pageRef}" param.view="${arg.view}" param.user="${u}">
+          <c:if test="${arg.user == u}">
+            <ao:class>pragmatickm-task-view-user-task-counts-active</ao:class>
+          </c:if>
+          <ao:choose>
+            <ao:when test="#{arg.showReady}">
+              <ao:out value="${u}" /> (<ao:out value="${readyTasks}" />/<ao:out value="${blockedTasks}" />/<ao:out value="${futureTasks}" />)
+            </ao:when>
+            <ao:otherwise>
+              <ao:out value="${u}" /> (<ao:out value="${allTasks}" />)
+            </ao:otherwise>
+          </ao:choose>
+        </ao:a>
+      </c:if>
+    </c:forEach>
+  </nav>
 </jsp:root>
