@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 pragmatickm-task-view - SemanticCMS view of tasks in the current page and all children.
-Copyright (C) 2013, 2014, 2015, 2016, 2020, 2021  AO Industries, Inc.
-	support@aoindustries.com
-	7262 Bull Pen Cir
-	Mobile, AL 36695
+Copyright (C) 2013, 2014, 2015, 2016, 2020, 2021, 2022  AO Industries, Inc.
+    support@aoindustries.com
+    7262 Bull Pen Cir
+    Mobile, AL 36695
 
 This file is part of pragmatickm-task-view.
 
@@ -26,41 +26,41 @@ along with pragmatickm-task-view.  If not, see <https://www.gnu.org/licenses/>.
 Views all tasks in a page and all subpages with optional filters.
 
 Arguments:
-	arg.page  The page that should be displayed, this must have already been captured with at least meta data.
+  arg.page  The page that should be displayed, this must have already been captured with at least meta data.
 -->
 <jsp:root
-	xmlns:ao="https://oss.aoapps.com/taglib/"
-	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:jsp="http://java.sun.com/JSP/Page"
-	xmlns:task="https://pragmatickm.com/task/taglib/"
-	version="2.1"
+  xmlns:ao="https://oss.aoapps.com/taglib/"
+  xmlns:c="http://java.sun.com/jsp/jstl/core"
+  xmlns:jsp="http://java.sun.com/JSP/Page"
+  xmlns:task="https://pragmatickm.com/task/taglib/"
+  version="2.1"
 >
-	<jsp:directive.page language="java" pageEncoding="UTF-8" />
-	<jsp:directive.page session="false" />
-	<c:set var="page" value="${arg.page}" />
-	<c:set var="pageRef" value="${page.pageRef}" />
-	<!-- Resolve the current user -->
-	<c:set var="user" value="${task:getUser()}" />
-	<ao:choose>
-		<ao:when test="#{pageScope.user == null}">
-			<h1>All Tasks in <ao:out value="${page.title}" /></h1>
-		</ao:when>
-		<ao:when test="#{pageScope.user.name == 'Unassigned'}">
-			<h1>Unassigned Tasks in <ao:out value="${page.title}" /></h1>
-		</ao:when>
-		<ao:otherwise>
-			<h1>Tasks for <ao:out value="${pageScope.user}" /> in <ao:out value="${page.title}" /></h1>
-		</ao:otherwise>
-	</ao:choose>
-	<ao:include
-		page="user-task-counts.inc.jspx"
-		arg.page="${page}"
-		arg.showReady="false"
-		arg.user="${pageScope.user.name}"
-		arg.view="tasks"
-	/>
-	<ao:include
-		page="task-table.inc.jspx"
-		arg.tasks="${task:getAllTasks(page, pageScope.user)}"
-	/>
+  <jsp:directive.page language="java" pageEncoding="UTF-8" />
+  <jsp:directive.page session="false" />
+  <c:set var="page" value="${arg.page}" />
+  <c:set var="pageRef" value="${page.pageRef}" />
+  <!-- Resolve the current user -->
+  <c:set var="user" value="${task:getUser()}" />
+  <ao:choose>
+    <ao:when test="#{pageScope.user == null}">
+      <h1>All Tasks in <ao:out value="${page.title}" /></h1>
+    </ao:when>
+    <ao:when test="#{pageScope.user.name == 'Unassigned'}">
+      <h1>Unassigned Tasks in <ao:out value="${page.title}" /></h1>
+    </ao:when>
+    <ao:otherwise>
+      <h1>Tasks for <ao:out value="${pageScope.user}" /> in <ao:out value="${page.title}" /></h1>
+    </ao:otherwise>
+  </ao:choose>
+  <ao:include
+    page="user-task-counts.inc.jspx"
+    arg.page="${page}"
+    arg.showReady="false"
+    arg.user="${pageScope.user.name}"
+    arg.view="tasks"
+  />
+  <ao:include
+    page="task-table.inc.jspx"
+    arg.tasks="${task:getAllTasks(page, pageScope.user)}"
+  />
 </jsp:root>
