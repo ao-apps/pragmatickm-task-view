@@ -58,6 +58,7 @@ public final class WhatToDoView extends View {
     public void contextInitialized(ServletContextEvent event) {
       SemanticCMS.getInstance(event.getServletContext()).addView(new WhatToDoView());
     }
+
     @Override
     public void contextDestroyed(ServletContextEvent event) {
       // Do nothing
@@ -86,14 +87,14 @@ public final class WhatToDoView extends View {
   @Override
   public boolean isApplicable(ServletContext servletContext, HttpServletRequest request, HttpServletResponse response, Page page) throws ServletException, IOException {
     return TaskUtil.hasAssignedTask(
-      servletContext,
-      request,
-      response,
-      page,
-      TaskUtil.getUser(
+        servletContext,
         request,
-        response
-      )
+        response,
+        page,
+        TaskUtil.getUser(
+            request,
+            response
+        )
     );
   }
 
@@ -104,8 +105,8 @@ public final class WhatToDoView extends View {
       return Collections.emptyMap();
     } else {
       return Collections.singletonMap(
-        "user",
-        Collections.singletonList(user.name())
+          "user",
+          Collections.singletonList(user.name())
       );
     }
   }
@@ -154,11 +155,11 @@ public final class WhatToDoView extends View {
   @Override
   public <__ extends FlowContent<__>> void doView(ServletContext servletContext, HttpServletRequest request, HttpServletResponse response, __ flow, Page page) throws ServletException, IOException, SkipPageException {
     Dispatcher.include(
-      servletContext,
-      JSPX_TARGET,
-      request,
-      response,
-      Collections.singletonMap("page", page)
+        servletContext,
+        JSPX_TARGET,
+        request,
+        response,
+        Collections.singletonMap("page", page)
     );
   }
 }
