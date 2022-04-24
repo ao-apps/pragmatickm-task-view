@@ -61,6 +61,7 @@ public final class TaskView extends View {
     public void contextInitialized(ServletContextEvent event) {
       HtmlRenderer.getInstance(event.getServletContext()).addView(new TaskView());
     }
+
     @Override
     public void contextDestroyed(ServletContextEvent event) {
       // Do nothing
@@ -98,8 +99,8 @@ public final class TaskView extends View {
       return Collections.emptyMap();
     } else {
       return Collections.singletonMap(
-        "user",
-        Collections.singletonList(user.name())
+          "user",
+          Collections.singletonList(user.name())
       );
     }
   }
@@ -148,11 +149,11 @@ public final class TaskView extends View {
   @Override
   public <__ extends FlowContent<__>> void doView(ServletContext servletContext, HttpServletRequest request, HttpServletResponse response, __ flow, Page page) throws ServletException, IOException, SkipPageException {
     Dispatcher.include(
-      servletContext,
-      JSPX_TARGET,
-      request,
-      response,
-      Collections.singletonMap("page", page)
+        servletContext,
+        JSPX_TARGET,
+        request,
+        response,
+        Collections.singletonMap("page", page)
     );
   }
 }
