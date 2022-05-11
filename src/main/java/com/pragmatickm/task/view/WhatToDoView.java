@@ -52,6 +52,9 @@ public final class WhatToDoView extends View {
 
   private static final String JSPX_TARGET = "/pragmatickm-task-view/what-to-do.inc.jspx";
 
+  /**
+   * Registers the "{@link #NAME}" view in {@link SemanticCMS}.
+   */
   @WebListener("Registers the \"" + NAME + "\" view in SemanticCMS.")
   public static class Initializer implements ServletContextListener {
     @Override
@@ -114,22 +117,18 @@ public final class WhatToDoView extends View {
   @Override
   public String getTitle(ServletContext servletContext, HttpServletRequest request, HttpServletResponse response, Page page) {
     StringBuilder title = new StringBuilder();
-    { // scoping block
-      User user = TaskUtil.getUser(request, response);
-      if (user == null) {
-        title.append("Everything To Do");
-      } else if (user == User.Unassigned) {
-        title.append("Unassigned What To Do");
-      } else {
-        title.append("What To Do for ").append(user);
-      }
+    User user = TaskUtil.getUser(request, response);
+    if (user == null) {
+      title.append("Everything To Do");
+    } else if (user == User.Unassigned) {
+      title.append("Unassigned What To Do");
+    } else {
+      title.append("What To Do for ").append(user);
     }
     title.append(TITLE_SEPARATOR).append(page.getTitle());
-    { // scoping block
-      String bookTitle = page.getPageRef().getBook().getTitle();
-      if (bookTitle != null && !bookTitle.isEmpty()) {
-        title.append(TITLE_SEPARATOR).append(bookTitle);
-      }
+    String bookTitle = page.getPageRef().getBook().getTitle();
+    if (bookTitle != null && !bookTitle.isEmpty()) {
+      title.append(TITLE_SEPARATOR).append(bookTitle);
     }
     return title.toString();
   }
@@ -153,7 +152,13 @@ public final class WhatToDoView extends View {
   }
 
   @Override
-  public <__ extends FlowContent<__>> void doView(ServletContext servletContext, HttpServletRequest request, HttpServletResponse response, __ flow, Page page) throws ServletException, IOException, SkipPageException {
+  public <__ extends FlowContent<__>> void doView(
+      ServletContext servletContext,
+      HttpServletRequest request,
+      HttpServletResponse response,
+      __ flow,
+      Page page
+  ) throws ServletException, IOException, SkipPageException {
     Dispatcher.include(
         servletContext,
         JSPX_TARGET,
