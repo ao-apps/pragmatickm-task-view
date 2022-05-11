@@ -55,6 +55,9 @@ public final class TaskView extends View {
 
   private static final String JSPX_TARGET = "/pragmatickm-task-view/tasks.inc.jspx";
 
+  /**
+   * Registers the "{@link #NAME}" view in {@link HtmlRenderer}.
+   */
   @WebListener("Registers the \"" + NAME + "\" view in HtmlRenderer.")
   public static class Initializer implements ServletContextListener {
     @Override
@@ -108,22 +111,18 @@ public final class TaskView extends View {
   @Override
   public String getTitle(ServletContext servletContext, HttpServletRequest request, HttpServletResponse response, Page page) {
     StringBuilder title = new StringBuilder();
-    { // scoping block
-      User user = TaskUtil.getUser(request, response);
-      if (user == null) {
-        title.append("All Tasks");
-      } else if (user == User.Unassigned) {
-        title.append("Unassigned Tasks");
-      } else {
-        title.append("Tasks for ").append(user);
-      }
+    User user = TaskUtil.getUser(request, response);
+    if (user == null) {
+      title.append("All Tasks");
+    } else if (user == User.Unassigned) {
+      title.append("Unassigned Tasks");
+    } else {
+      title.append("Tasks for ").append(user);
     }
     title.append(TITLE_SEPARATOR).append(page.getTitle());
-    { // scoping block
-      String bookTitle = SemanticCMS.getInstance(servletContext).getBook(page.getPageRef().getBookRef()).getTitle();
-      if (bookTitle != null && !bookTitle.isEmpty()) {
-        title.append(TITLE_SEPARATOR).append(bookTitle);
-      }
+    String bookTitle = SemanticCMS.getInstance(servletContext).getBook(page.getPageRef().getBookRef()).getTitle();
+    if (bookTitle != null && !bookTitle.isEmpty()) {
+      title.append(TITLE_SEPARATOR).append(bookTitle);
     }
     return title.toString();
   }
@@ -147,7 +146,13 @@ public final class TaskView extends View {
   }
 
   @Override
-  public <__ extends FlowContent<__>> void doView(ServletContext servletContext, HttpServletRequest request, HttpServletResponse response, __ flow, Page page) throws ServletException, IOException, SkipPageException {
+  public <__ extends FlowContent<__>> void doView(
+      ServletContext servletContext,
+      HttpServletRequest request,
+      HttpServletResponse response,
+      __ flow,
+      Page page
+  ) throws ServletException, IOException, SkipPageException {
     Dispatcher.include(
         servletContext,
         JSPX_TARGET,
