@@ -46,7 +46,7 @@ along with pragmatickm-task-view.  If not, see <https://www.gnu.org/licenses/>.
     <sonar.coverage.exclusions>**.*</sonar.coverage.exclusions>
   </properties>
 
-  <name>PragmaticKM Task View²</name>
+  <name>PragmaticKM Task View</name>
   <url>https://pragmatickm.com/task/view/</url>
   <description>SemanticCMS view of tasks in the current page and all children.</description>
   <inceptionYear>2013</inceptionYear>
