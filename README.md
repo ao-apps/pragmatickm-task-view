@@ -23,7 +23,7 @@
 * [Project Home](https://pragmatickm.com/task/view/)
 * [Changelog](https://pragmatickm.com/task/view/changelog)
 * [API Docs](https://pragmatickm.com/task/view/apidocs/)
-* [Maven Central Repository](https://central.sonatype.com/search?namespace=com.pragmatickm&q=a%3Apragmatickm-task-view)
+* [Maven Central Repository](https://central.sonatype.com/artifact/com.pragmatickm/pragmatickm-task-view)
 * [GitHub](https://github.com/ao-apps/pragmatickm-task-view)
 
 ## Contact Us
