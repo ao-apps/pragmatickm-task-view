@@ -41,6 +41,9 @@ along with pragmatickm-task-view.  If not, see <https://www.gnu.org/licenses/>.
     <documented.artifactId>pragmatickm-task-view</documented.artifactId>
     <documented.name>PragmaticKM Task View</documented.name>
     <documented.description>SemanticCMS view of all tasks in the current page and all children.</documented.description>
+    <javadoc.breadcrumbs><![CDATA[<a target="${javadoc.target}" href="https://pragmatickm.com/">PragmaticKM</a>
+/ <a target="${javadoc.target}" href="https://pragmatickm.com/task/">Task</a>
+/ <a target="${javadoc.target}" href="${project.url}">View</a>]]></javadoc.breadcrumbs>
 
     <description.html><![CDATA[Documentation for <a target="${javadoc.target}" href="${project.url}">${documented.name}</a> in <a target="${javadoc.target}" href="https://semanticcms.com/">SemanticCMS</a> format.]]></description.html>
     <!-- SonarQube -->
