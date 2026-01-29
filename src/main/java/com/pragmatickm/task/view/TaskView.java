@@ -56,7 +56,7 @@ public final class TaskView extends View {
   private static final String JSPX_TARGET = "/pragmatickm-task-view/tasks.inc.jspx";
 
   /**
-   * Registers the "{@link #NAME}" view in {@link HtmlRenderer}.
+   * Registers the "{@link TaskView#NAME}" view in {@link HtmlRenderer}.
    */
   @WebListener("Registers the \"" + NAME + "\" view in HtmlRenderer.")
   public static class Initializer implements ServletContextListener {

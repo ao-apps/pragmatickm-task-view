@@ -54,7 +54,7 @@ public final class WhatToDoView extends View {
   private static final String JSPX_TARGET = "/pragmatickm-task-view/what-to-do.inc.jspx";
 
   /**
-   * Registers the "{@link #NAME}" view in {@link HtmlRenderer}.
+   * Registers the "{@link WhatToDoView#NAME}" view in {@link HtmlRenderer}.
    */
   @WebListener("Registers the \"" + NAME + "\" view in HtmlRenderer.")
   public static class Initializer implements ServletContextListener {
