@@ -53,7 +53,7 @@ public final class WhatToDoView extends View {
   private static final String JSPX_TARGET = "/pragmatickm-task-view/what-to-do.inc.jspx";
 
   /**
-   * Registers the "{@link #NAME}" view in {@link SemanticCMS}.
+   * Registers the "{@link WhatToDoView#NAME}" view in {@link SemanticCMS}.
    */
   @WebListener("Registers the \"" + NAME + "\" view in SemanticCMS.")
   public static class Initializer implements ServletContextListener {
