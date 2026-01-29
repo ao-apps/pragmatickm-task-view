@@ -55,7 +55,7 @@ public final class TaskView extends View {
   private static final String JSPX_TARGET = "/pragmatickm-task-view/tasks.inc.jspx";
 
   /**
-   * Registers the "{@link #NAME}" view in {@link SemanticCMS}.
+   * Registers the "{@link TaskView#NAME}" view in {@link SemanticCMS}.
    */
   @WebListener("Registers the \"" + NAME + "\" view in SemanticCMS.")
   public static class Initializer implements ServletContextListener {
