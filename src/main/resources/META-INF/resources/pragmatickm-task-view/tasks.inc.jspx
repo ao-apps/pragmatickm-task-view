@@ -45,7 +45,7 @@ Arguments:
     <ao:when test="#{pageScope.user == null}">
       <h1>All Tasks in <ao:out value="${page.title}" /></h1>
     </ao:when>
-    <ao:when test="#{pageScope.user.name == 'Unassigned'}">
+    <ao:when test="#{pageScope.user == 'Unassigned'}">
       <h1>Unassigned Tasks in <ao:out value="${page.title}" /></h1>
     </ao:when>
     <ao:otherwise>
@@ -56,7 +56,7 @@ Arguments:
     page="user-task-counts.inc.jspx"
     arg.page="${page}"
     arg.showReady="false"
-    arg.user="${pageScope.user.name}"
+    arg.user="${pageScope.user}"
     arg.view="tasks"
   />
   <ao:include

@@ -26,7 +26,6 @@ package com.pragmatickm.task.view;
 import com.aoapps.html.servlet.FlowContent;
 import com.aoapps.servlet.http.Dispatcher;
 import com.pragmatickm.task.model.Task;
-import com.pragmatickm.task.model.User;
 import com.pragmatickm.task.renderer.html.TaskUtil;
 import com.semanticcms.core.controller.PageUtils;
 import com.semanticcms.core.controller.SemanticCMS;
@@ -97,13 +96,13 @@ public final class TaskView extends View {
 
   @Override
   public Map<String, List<String>> getLinkParams(ServletContext servletContext, HttpServletRequest request, HttpServletResponse response, Page page) {
-    User user = TaskUtil.getUser(request, response);
+    String user = TaskUtil.getUser(request, response);
     if (user == null) {
       return Collections.emptyMap();
     } else {
       return Collections.singletonMap(
           "user",
-          Collections.singletonList(user.name())
+          Collections.singletonList(user)
       );
     }
   }
@@ -111,10 +110,10 @@ public final class TaskView extends View {
   @Override
   public String getTitle(ServletContext servletContext, HttpServletRequest request, HttpServletResponse response, Page page) {
     StringBuilder title = new StringBuilder();
-    User user = TaskUtil.getUser(request, response);
+    String user = TaskUtil.getUser(request, response);
     if (user == null) {
       title.append("All Tasks");
-    } else if (user == User.Unassigned) {
+    } else if (Task.UNASSIGNED.equals(user)) {
       title.append("Unassigned Tasks");
     } else {
       title.append("Tasks for ").append(user);
