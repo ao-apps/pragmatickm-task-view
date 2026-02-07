@@ -83,7 +83,7 @@ Arguments:
             <c:set var="taskStatus" value="${multipleStatuses[task]}" />
             <c:set var="taskPriority" value="${
               taskStatus.date != null
-              ? task.getPriority(taskStatus.date, task:getToday().timeInMillis)
+              ? task.getPriority(taskStatus.date, task:getToday())
               : task.zeroDayPriority
             }" />
             <tr>
